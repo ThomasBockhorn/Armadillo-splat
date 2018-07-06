@@ -1,11 +1,21 @@
 /*background: this is where the roads will be placed  I set the background to green
 to eliminate the need to build grass*/
-#background{
+#background,
+#enemyPlane,
+#protagonistPlane{
     height: 100%;
     width: 100%;
-    z-index: 0;
     position: absolute;
     top: 0;
     left: 0;
+}
+#background{
+    z-index: 0;
     background-color: green;
+}
+#enemyPlane{
+    z-index: 1;
+}
+#protagonistPlane{
+    z-index: 2;
 }
