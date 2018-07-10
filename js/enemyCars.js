@@ -30,7 +30,7 @@ class Cars{
         this.yPosition = yPosition;
         this.xPosition = xPosition;
         //this.speed = speed;  //This will change the speed of the car
-        this.speed = Math.floor(Math.random( )* 5 +1); //this creates a random speed for car
+        this.speed = Math.floor(Math.random( )* 10 +1); //this creates a random speed for car
     }
 }
 
@@ -38,20 +38,43 @@ class Cars{
 (function createCars(){
     //These are the three road positions on which the cars can drive on
     //It creates the cars then puts them in an array for storage
-    for(let i = 0; i < 10; i++){
-        const roadPosition = [50, 150, 250];
-        const source = "pic/enemy_car.png"; //The same car image is loaded
-        //This creates the car
-        const yPosition = roadPosition[i];
-        xPosition = enemyPlain.width;
-        const car = new Cars(source, yPosition, xPosition);
-        car.xPosition = enemyPlain.width;
+    const roadPosition = [50, 150, 250];
+    const source = "pic/enemy_car.png"; //The same car image is loaded
+    
+    //We push the new cars in the carArray
+    for(let i = 0; i < 25; i++){
+         //We shuffle the roadPositions by calling randomLocation
+         randomLocation(roadPosition);
 
-        //Then we push it into the array
-        carArray.push(car);
-    }
+         //This creates the car
+         const yPosition = roadPosition[0];
+         xPosition = enemyPlain.width;
+         const car = new Cars(source, yPosition, xPosition);
+         car.xPosition = enemyPlain.width;
+         
+         //Then we push it into the array
+         carArray.push(car);
+    }    
 })();
 
+//This will randomly shuffle the three roads in the array
+function randomLocation(roadPosition){
+    let length = roadPosition.length
+    let i //index of the roadPosition
+    let transElement  //transfer variable that holds the element in roadPosition
+
+    //While there are remaining elements we shuffle the road locations
+    while(length){
+        //This picks an element from roadPosition
+        i = Math.floor(Math.random() * length--);
+
+        //We swap it with the current element
+        transElement = roadPosition[length];
+        roadPosition[length] = roadPosition[i];
+        roadPosition[i] = transElement;
+    }
+    return roadPosition;
+}
 //This function will animate all the cars in the carArray
 function animate(){
     ctx.clearRect(0,0, enemyPlain.width, enemyPlain.height);
@@ -69,13 +92,11 @@ function animate(){
         //Draw each of the images
         for(let i = 0; i <carArray.length; i++){
             ctx.drawImage(carArray[i].carImg, carArray[i].xPosition, carArray[i].yPosition, 80, 80);
-            if(carArray[i].xPosition > -50){
+            if(carArray[i].xPosition > -10){
                 carArray[i].xPosition = carArray[i].xPosition - carArray[i].speed;
             }else{
                 carArray[i].xPosition = enemyPlain.width;
             }
-            
-            console.log(carArray[i]);
         }
 
         requestID = requestAnimationFrame(function(){

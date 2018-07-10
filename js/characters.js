@@ -44,7 +44,7 @@ class Cars{
     //use the time object as reference for a better animation
     draw(){
         const ref = this;
-
+        
         //requests another frame
         if(ref.xPosition > -50){
             //Sees if enough time has elapsed
@@ -55,7 +55,7 @@ class Cars{
                 //calculates then time stamp
                 characterTime.then = characterTime.now - (characterTime.elapsed % characterTime.fpsInterval);
                 //This clears the canvas so the cars seem to animate
-                ref.enemyPlane.width = ref.enemyPlane.width;
+                ref.ctx.clearRect(0, 0, ref.enemyPlane.width, ref.enemyPlane.height);
                 ref.ctx.drawImage(ref.carImg, ref.xPosition, ref.yPosition, 80, 80);
                 ref.xPosition = ref.xPosition - ref.speed;
             } 
@@ -75,13 +75,13 @@ class Cars{
 //this starts that animation clock
 animationTiming();
 
-function characterArray(){
+function storeCharacter(){
     //These are the three road positions on which the cars can drive on
     //It creates the cars then puts them in an array for storage
     for(let i = 0; i < 3; i++){
         const roadPosition = [50, 150, 250];
         const source = "pic/enemy_car.png"; //The same car image is loaded
-        const yPosition = 50; //every car starts in that position
+        const yPosition = roadPosition[i];
         let speed = Math.floor(Math.random( )* 5 +1);
 
         //This creates the car
@@ -92,13 +92,9 @@ function characterArray(){
     }
    
 }
-characterArray();
-//const car = new Cars;
-//car.draw(carArray[0]);
-//Creating a new car 
-const car = new Cars;
-car.carImg.src = "pic/enemy_car.png";
-car.yPosition = 50;
-car.speed = 5;
+storeCharacter();
+for(let i = 0; i < carArray.length; i++){
+    carArray[i].draw();
+}
 
-car.draw();
+
