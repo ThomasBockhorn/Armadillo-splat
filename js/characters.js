@@ -55,7 +55,18 @@ function keyMove(){
         //clears canvas then redraws image
         protagonistCtx.clearRect(0,0, protagonistPlane.width, protagonistPlane.height);
         protagonistCtx.drawImage(protagonist.img, protagonist.xPosition, protagonist.yPosition, 70, 70);
+
+        //winning function checks to see if player reaches home
+        winning();
     }, 20);
 }
-
 keyMove();
+
+//When the armadillo reaches the yPosition = 0 then the player wins
+//the game and the armadillo goes back to its initial position
+function winning(){
+    if(protagonist.yPosition === 0){
+        protagonist.xPosition = 500;
+        protagonist.yPosition = 400;
+    }
+}
