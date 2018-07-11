@@ -23,7 +23,7 @@ function keyMove(){
     //loads the image and initial position 
     protagonist.img.src = "pic/armadillo.png", //The image of the armadillo
     protagonist.img.onload = function() {
-        protagonistCtx.drawImage(protagonist.img, protagonist.xPosition, protagonist.yPosition, 70, 70);
+        protagonistCtx.drawImage(protagonist.img, protagonist.xPosition, protagonist.yPosition, 75, 75);
     }
     //This gets the value of the keyPress when a key is pressed
     document.onkeydown = function(e){
@@ -45,22 +45,32 @@ function keyMove(){
         else if ((protagonist.keyPress === 38) && (protagonist.yPosition > 0)){
             protagonist.yPosition -= 4;  //if up arrow key is pressed
         }
-        else if ((protagonist.keyPress === 39) && (protagonist.xPosition < protagonistPlane.width - 70)){
+        else if ((protagonist.keyPress === 39) && (protagonist.xPosition < protagonistPlane.width - 75)){
             protagonist.xPosition += 4;  //if right arrow key is pressed
         }
-        else if ((protagonist.keyPress === 40) && (protagonist.yPosition < protagonistPlane.height - 70)){
+        else if ((protagonist.keyPress === 40) && (protagonist.yPosition < protagonistPlane.height - 75)){
             protagonist.yPosition += 4; //if down arrow key is pressed
         }
 
         //clears canvas then redraws image
         protagonistCtx.clearRect(0,0, protagonistPlane.width, protagonistPlane.height);
-        protagonistCtx.drawImage(protagonist.img, protagonist.xPosition, protagonist.yPosition, 70, 70);
+        protagonistCtx.drawImage(protagonist.img, protagonist.xPosition, protagonist.yPosition, 75, 75);
 
         //winning function checks to see if player reaches home
         winning();
+
+        //checks to see if the carArray has any collision = true
+        carArray.some(function(car){
+            if(car.collision === true){
+                protagonist.xPosition = 500;
+                protagonist.yPosition = 400;
+                car.collision = false;   //Then we return it to false
+            }
+        })
     }, 20);
 }
 keyMove();
+
 
 //When the armadillo reaches the yPosition = 0 then the player wins
 //the game and the armadillo goes back to its initial position

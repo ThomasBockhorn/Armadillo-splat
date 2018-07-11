@@ -24,13 +24,27 @@ const characterTime = {
 
 //The car class will allow multiple cars to be on the canvas at the same time.
 class Cars{
-    constructor(carImg, yPosition, xPosition){
+    constructor(carImg, yPosition, xPosition, collision){
         this.carImg = new Image();
         this.carImg.src = carImg;
         this.yPosition = yPosition;
         this.xPosition = xPosition;
         //this.speed = speed;  //This will change the speed of the car
         this.speed = Math.floor(Math.random( )* 10 +1); //this creates a random speed for car
+        //this property checks for collision
+        this.collision = collision;
+        this.collision = false;
+    }
+    //This method checks to see if a car splats the armadillo
+    splat(){
+        const ref = this;
+
+        if(ref.xPosition < protagonist.xPosition + 75 && ref.xPosition + 80
+            > protagonist.xPosition && ref.yPosition < protagonist.yPosition + 75 && 80 + 
+            ref.yPosition > protagonist.yPosition){ 
+                ref.collision = true;
+        }
+
     }
 }
 
@@ -51,7 +65,7 @@ class Cars{
          xPosition = enemyPlain.width;
          const car = new Cars(source, yPosition, xPosition);
          car.xPosition = enemyPlain.width;
-         
+        
          //Then we push it into the array
          carArray.push(car);
     }    
@@ -92,13 +106,13 @@ function animate(){
         //Draw each of the images
         for(let i = 0; i <carArray.length; i++){
             ctx.drawImage(carArray[i].carImg, carArray[i].xPosition, carArray[i].yPosition, 80, 80);
+            carArray[i].splat();
             if(carArray[i].xPosition > -10){
                 carArray[i].xPosition = carArray[i].xPosition - carArray[i].speed;
             }else{
                 carArray[i].xPosition = enemyPlain.width;
             }
         }
-
         requestID = requestAnimationFrame(function(){
                     animate();
         });   
