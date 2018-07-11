@@ -75,8 +75,21 @@ keyMove();
 //When the armadillo reaches the yPosition = 0 then the player wins
 //the game and the armadillo goes back to its initial position
 function winning(){
+    //needed for winning message
+    const modalMessage = document.querySelector(".modal");
+    const spanModal = document.querySelector(".close");
+    
     if(protagonist.yPosition === 0){
         protagonist.xPosition = 500;
         protagonist.yPosition = 400;
+
+        //Display when armadillo reaches other side
+        modalMessage.style.display = "block";
+
+        //When user clicks on close button
+        //When user clicks on the close button
+        spanModal.addEventListener("click", function(){
+            modalMessage.style.display = "none";
+        });
     }
 }

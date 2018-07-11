@@ -39,8 +39,8 @@ class Cars{
     splat(){
         const ref = this;
 
-        if(ref.xPosition < protagonist.xPosition + 75 && ref.xPosition + 80
-            > protagonist.xPosition && ref.yPosition < protagonist.yPosition + 75 && 80 + 
+        if(ref.xPosition < protagonist.xPosition + 75 && ref.xPosition + 75
+            > protagonist.xPosition && ref.yPosition < protagonist.yPosition + 75 && 75 + 
             ref.yPosition > protagonist.yPosition){ 
                 ref.collision = true;
         }
