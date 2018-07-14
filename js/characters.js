@@ -92,6 +92,7 @@ function winning(){
         //When user clicks on the close button
         spanModal.addEventListener("click", function(){
             modalMessage.style.display = "none";
+            protagonistCtx.clearRect(0,0, protagonistPlane.width, protagonistPlane.height);
             keyMove();  //This will resume the character from moving
         });
     }
