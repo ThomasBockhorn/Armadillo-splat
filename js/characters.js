@@ -8,6 +8,7 @@
 //global variables
 const protagonistPlane = document.getElementById("protagonistPlane");
 const protagonistCtx = protagonistPlane.getContext("2d");
+let pause;
 
 //Protagonist object
 const protagonist = {
@@ -35,7 +36,7 @@ function keyMove(){
         protagonist.press = 0;
     }
     //This will determine what key is pressed and if it is a arrow key, move the character according
-    setInterval(function(){
+    pause = setInterval(function(){
         if(protagonist.press === 0){
             return;  // if the key is released do nothing
         }
@@ -85,11 +86,13 @@ function winning(){
 
         //Display when armadillo reaches other side
         modalMessage.style.display = "block";
+        clearInterval(pause);  //This will stop the character from moving 
 
         //When user clicks on close button
         //When user clicks on the close button
         spanModal.addEventListener("click", function(){
             modalMessage.style.display = "none";
+            keyMove();  //This will resume the character from moving
         });
     }
 }
