@@ -2,9 +2,8 @@
 
 ## Introduction ##
 
-Armadillo splat is a clone of the more will know game froger.  The objective of the game
-is to get to the other side without getting run overed by the numerous cars on the
-road.  Once you reach the other side you get a winning message.  Fail to reach, you start again.
+Armadillo Splat is a clone of the more well-known game Frogger.  The objective of the game is to get to the other side without getting runover by the numerous cars on the
+road.  Once you reach the other side you will get a winning message.  Fail to reach, you will start again.
 
 ## Instructions ##
 
